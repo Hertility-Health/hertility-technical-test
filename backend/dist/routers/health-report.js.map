@@ -1,0 +1,1 @@
+{"version":3,"file":"health-report.js","sourceRoot":"","sources":["../../src/routers/health-report.ts"],"names":[],"mappings":";;;;;AACA,sDAA8B;AAE9B,MAAM,YAAY,GAAG,iBAAO,CAAC,MAAM,EAAE,CAAC;AAEtC,YAAY,CAAC,GAAG,CAAC,GAAG,EAAE,CAAC,GAAG,EAAE,GAAG,EAAE,EAAE;IAC/B,GAAG,CAAC,IAAI,CAAC,SAAS,CAAC,CAAC;AACxB,CAAC,CAAC,CAAC;AAEH,YAAY,CAAC"}
