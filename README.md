@@ -1,6 +1,6 @@
 ## Hertility engineering technical test
 
-Welcome to the Hertility Health Engineering Technical Test. This is a non-timed technical test which you may complete at your own pace. This test is for fullstack engineers so you will be simultaneously working across two directories: one for the frontend and one for the backend. 
+Welcome to the Hertility Health Engineering Technical Test. This is a non-timed technical test which you may complete at your own pace. This test is for fullstack engineers so you will be simultaneously working across two directories: one for the frontend and one for the backend. The frontend is a React app written in Typescript and the backend is an NodeJS Express server also written in Typescript.
 
 ### Guidelines
 1. Install any npm you wish to use in this challenge.
@@ -18,7 +18,7 @@ Welcome to the Hertility Health Engineering Technical Test. This is a non-timed 
  git clone https://github.com/Hertility-Health/hertility-technical-test.git
  ```
 
-You will now need two terminals open at the same time to run the development environment. One to run the frontend and one to run the backend.
+You will now need two terminals open at the same time to run the development environment. One to run the frontend react app and one to run the backend express server.
 
 #### Terminal #1
 1. cd into the `frontend` directory
