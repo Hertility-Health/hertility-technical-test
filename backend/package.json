@@ -5,15 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsc --watch && node --watch dist/index.js"
+    "dev:run": "node --watch dist/index.js",
+    "dev:build": "tsc --watch",
+    "dev": "npm run dev:build & npm run dev:run"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21"
   }
 }

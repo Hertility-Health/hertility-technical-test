@@ -1,0 +1,372 @@
+[
+    {
+        "id": 1,
+        "userId": 101,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 120
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "userId": 102,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 53.9
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "userId": 103,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 21.06
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 18.5
+            },
+            {
+                "code": "PROL",
+                "units": "mIU/L",
+                "value": 243
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 145
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 6.6
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 9.8
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "userId": 104,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 30.94
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 17.7
+            },
+            {
+                "code": "PROL",
+                "units": "mIU/L",
+                "value": 331
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 155
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 7.2
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 6.2
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "userId": 105,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 18.14
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 15.4
+            },
+            {
+                "code": "PROL",
+                "units": "mIU/L",
+                "value": 401
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 125
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 5.5
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 7.2
+            },
+            {
+                "code": "TEST",
+                "units": "nmol/L",
+                "value": 2.03
+            },
+            {
+                "code": "SHBG",
+                "units": "nmol/L",
+                "value": 46.8
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "userId": 106,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 7.39
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "userId": 107,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 52.53
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "userId": 108,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 46.82
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 16.5
+            },
+            {
+                "code": "PROL",
+                "units": "mIU/L",
+                "value": 146
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 125
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 8.0
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 7.0
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "userId": 109,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 39.95
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 15.6
+            },
+            {
+                "code": "PROL",
+                "units": "mIU/L",
+                "value": 409
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 159
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 6.8
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 7.2
+            },
+            {
+                "code": "TEST",
+                "units": "nmol/L",
+                "value": 2.03
+            },
+            {
+                "code": "SHBG",
+                "units": "nmol/L",
+                "value": 55.8
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "userId": 110,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 94.67
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "userId": 111,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 12.1
+            }
+        ]
+    },
+    {
+        "id": 12,
+        "userId": 112,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 163.58
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 14.8
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 591
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 13.1
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 28.4
+            }
+        ]
+    },
+    {
+        "id": 13,
+        "userId": 113,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 26.42
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 15.3
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 106
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 9.5
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 4.7
+            }
+        ]
+    },
+    {
+        "id": 14,
+        "userId": 114,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 5.74
+            }
+        ]
+    },
+    {
+        "id": 15,
+        "userId": 115,
+        "hormoneResults": [
+            {
+                "code": "AMH",
+                "units": "pmol/L",
+                "value": 46.35
+            },
+            {
+                "code": "TF",
+                "units": "pmol/L",
+                "value": 17.5
+            },
+            {
+                "code": "OEST",
+                "units": "pmol/L",
+                "value": 159
+            },
+            {
+                "code": "FSH",
+                "units": "IU/L",
+                "value": 6.8
+            },
+            {
+                "code": "LH",
+                "units": "IU/L",
+                "value": 7.2
+            }
+        ]
+    }
+]
