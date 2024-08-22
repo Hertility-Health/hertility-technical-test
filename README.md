@@ -4,7 +4,7 @@ Welcome to the Hertility Health Engineering Technical Test. This is a non-timed 
 
 ### Guidelines
 1. Install any npm you wish to use in this challenge.
-1. Styling is not required as this test is mainly a gauge of your Typescript ability—you may use whichever method of styling you would like.
+1. Styling is encouraged but not necessarily required as this test is mainly a gauge of your Typescript ability—you may use whichever methods of styling you prefer.
 1. Aim to complete the challenge in under 60 minutes.
 1. Once complete, you may open a pull request to the main repository or alternatively, send us a zip file of your code via email (excluding the `node_modules` directory).
 
