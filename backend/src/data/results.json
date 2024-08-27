@@ -31,11 +31,6 @@
                 "value": 21.06
             },
             {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 18.5
-            },
-            {
                 "code": "PROL",
                 "units": "mIU/L",
                 "value": 243
@@ -67,11 +62,6 @@
                 "value": 30.94
             },
             {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 17.7
-            },
-            {
                 "code": "PROL",
                 "units": "mIU/L",
                 "value": 331
@@ -101,11 +91,6 @@
                 "code": "AMH",
                 "units": "pmol/L",
                 "value": 18.14
-            },
-            {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 15.4
             },
             {
                 "code": "PROL",
@@ -171,11 +156,6 @@
                 "value": 46.82
             },
             {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 16.5
-            },
-            {
                 "code": "PROL",
                 "units": "mIU/L",
                 "value": 146
@@ -205,11 +185,6 @@
                 "code": "AMH",
                 "units": "pmol/L",
                 "value": 39.95
-            },
-            {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 15.6
             },
             {
                 "code": "PROL",
@@ -275,11 +250,6 @@
                 "value": 163.58
             },
             {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 14.8
-            },
-            {
                 "code": "OEST",
                 "units": "pmol/L",
                 "value": 591
@@ -304,11 +274,6 @@
                 "code": "AMH",
                 "units": "pmol/L",
                 "value": 26.42
-            },
-            {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 15.3
             },
             {
                 "code": "OEST",
@@ -346,11 +311,6 @@
                 "code": "AMH",
                 "units": "pmol/L",
                 "value": 46.35
-            },
-            {
-                "code": "TF",
-                "units": "pmol/L",
-                "value": 17.5
             },
             {
                 "code": "OEST",
