@@ -26,7 +26,7 @@ function App() {
     option === FilterOptions.all && setResultList(data);
   };
 
-  if (error) return <h1>Woops!</h1>;
+  if (error) return <h1>Woops!!</h1>;
 
   return (
     <div className="bg-background">
