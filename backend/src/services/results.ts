@@ -1,14 +1,5 @@
-interface HormoneResults {
-    code: string;
-    units: string;
-    value: number;
-}
-
-interface Results {
-	id: number;
-    userId: number;
-    hormoneResults: Array<HormoneResults>;
-}
+import { Results } from "../types";
+import { checkResults, hormoneRanges } from "../utils/utils";
 
 // this would normally be a database query - you don't need to change this function
 export async function fetchResults() {
@@ -16,5 +7,6 @@ export async function fetchResults() {
         assert: { type: "json" },
     });
 	const results = json.default;
-    return results;
+    const resultsWithStatus = checkResults(results, hormoneRanges)
+    return resultsWithStatus;
 }
