@@ -11,6 +11,8 @@ function App() {
     queryFn: getResults,
   });
   const [resultList, setResultList] = useState<Results[] | undefined>(data);
+  const notInRange = data?.filter((result) => result.status === "not in range");
+  const inRange = data?.filter((result) => result.status === "in range");
 
   useEffect(() => {
     if (data) {
@@ -19,10 +21,8 @@ function App() {
   }, [data]);
 
   const handleFilterClick = (option: string | null) => {
-    option === FilterOptions.notInRange &&
-      setResultList(data?.filter((result) => result.status === "not in range"));
-    option === FilterOptions.inRange &&
-      setResultList(data?.filter((result) => result.status === "in range"));
+    option === FilterOptions.notInRange && setResultList(notInRange);
+    option === FilterOptions.inRange && setResultList(inRange);
     option === FilterOptions.all && setResultList(data);
   };
 
