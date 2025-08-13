@@ -1,0 +1,155 @@
+/* ================= Theme variables ================= */
+:root {
+  --color-bg: #ffffff;             /* surfaces */
+  --color-text: #0f172a;           /* main text */
+  --color-muted: #475569;          /* labels, subtle text */
+  --color-muted-2: #64748b;        /* header text */
+  --color-border: #e5e7eb;         /* table/filter borders */
+  --color-row-border: #f1f5f9;     /* row divider */
+  
+
+  /* Status pills */
+  --ok-fg: #047857;                /* emerald-700 */
+  --bad-fg: #be123c;               /* rose-700 */
+}
+
+/* Root container */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text);
+  background: transparent; /* keep page bg as-is */
+}
+
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: var(--color-muted-2);
+}
+
+/* --- Headings --- */
+h1, h2 {
+  text-align: center;
+  margin: 0.25rem 0;
+  color: var(--color-text);
+}
+
+/* --- Filter bar --- */
+.resultsFilters {
+  color: var(--color-muted);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 12px 0 16px;
+}
+
+.resultsFilters label {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+.resultsFilters select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+  color: var(--color-muted);
+}
+
+/* --- Results container --- */
+.results { margin-top: 8px; }
+
+/* Header row */
+.resultsHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 10px 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--color-muted-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* “Table” body */
+.resultsList {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+/* Rows */
+.resultsItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 12px;
+  align-items: center;
+  border-top: 1px solid var(--color-row-border);
+}
+
+/* --- Status pills --- */
+.status-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .02em;
+}
+
+.status-pill.ok{
+  background: var(--color-bg);
+  color: var(--ok-fg);
+  border: 1px solid rgba(5,150,105,.2);
+}
+
+.status-pill.bad{
+  background: var(--color-bg);
+  color: var(--bad-fg);
+  border: 1px solid rgba(244,63,94,.2);
+}
+
+.dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+}
