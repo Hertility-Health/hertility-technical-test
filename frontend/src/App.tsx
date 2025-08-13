@@ -1,68 +1,39 @@
-import { useEffect } from 'react';
-import './App.css'
-import React from 'react';
-
-interface HormoneResults {
-  code: string;
-  units: string;
-  value: number;
-}
-
-interface Results {
-  id: number;
-  userId: number;
-  hormoneResults: Array<HormoneResults>;
-}
+import { useEffect } from "react";
+import "./App.css";
+import React from "react";
+import { ResultData } from "./types/ResultData";
+import { Results } from "./components/Results";
+import { H1, H2 } from "./components/ui/text";
 
 const fetchResults = async () => {
   try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
+    const res = await fetch("http://localhost:52863/results");
+    const json = await res.json();
+    return json as ResultData[];
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-  return []
-}
+  return [];
+};
 
 function App() {
-
-  const [results, setResults] = React.useState<Results[]>([])
+  const [results, setResults] = React.useState<ResultData[]>([]);
 
   useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+    fetchResults().then((results) => {
+      setResults(results);
+    });
+  }, []);
 
   return (
-    <div> 
-      <h2>Hertility admin dashboard</h2>
-      <h1>Hormone results</h1>
-
-      <div className="results">
-        <div className="resultsHeader">
-          <p>result id</p>
-          <p>user id</p>
-          <p>status</p>
-        </div>
-        <div className="resultsList">
-          {
-            results.map(result => {
-
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
-        </div>
+    <div className="bg-background text-foreground flex">
+      <div className="max-w-4xl w-full mx-auto flex flex-col gap-2">
+        <H2>Hertility admin dashboard</H2>
+        <H1>Hormone results</H1>
+        <Results results={results} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
