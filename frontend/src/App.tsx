@@ -1,68 +1,91 @@
-import { useEffect } from 'react';
-import './App.css'
-import React from 'react';
+import { useMemo, useState } from 'react';
+import './styles/App.css';
+import logo from './assets/hertility-logo.svg';
+import { useResults } from './hooks/useResults';
 
-interface HormoneResults {
-  code: string;
-  units: string;
-  value: number;
-}
+import type { Filter, SortDir, SortKey } from './types';
+import ResultsFilter from './components/ResultsFilter';
+import ResultsTable from './components/ResultsTable';
 
-interface Results {
-  id: number;
-  userId: number;
-  hormoneResults: Array<HormoneResults>;
-}
+export default function App() {
+  const { results, isLoading, isError } = useResults();
 
-const fetchResults = async () => {
-  try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
-  } catch (error) {
-    console.error(error)
-  }
-  return []
-}
+  // filtering
+  const [filter, setFilter] = useState<Filter>('ALL');
 
-function App() {
+  // sorting
+  const [sortKey, setSortKey] = useState<SortKey>('id');
+  const [sortDir, setSortDir] = useState<SortDir>('asc');
+  
+  // counts the items
+  const counts = useMemo(() => {
+    const inRange = results.filter((r) => r.status === 'IN RANGE').length;
+    const notInRange = results.filter(
+      (r) => r.status === 'NOT IN RANGE'
+    ).length;
+    return { inRange, notInRange, total: results.length };
+  }, [results]);
 
-  const [results, setResults] = React.useState<Results[]>([])
+  // filter the results
+  const filtered = useMemo(() => {
+    if (filter === 'ALL') return results;
+    return results.filter((r) => r.status === filter);
+  }, [results, filter]);
+  
+  // sort the columns
+  const sorted = useMemo(() => {
+    const STATUS_ORDER = ['IN RANGE', 'NOT IN RANGE'];
+    const copy = [...filtered];
 
-  useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+    copy.sort((a, b) => {
+      if (sortKey === 'status') {
+        // Compare using our predefined order
+        return STATUS_ORDER.indexOf(a.status) - STATUS_ORDER.indexOf(b.status);
+      }
+
+      // For other keys, just do a normal comparison
+      if (a[sortKey] < b[sortKey]) return sortDir === 'asc' ? -1 : 1;
+      if (a[sortKey] > b[sortKey]) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+    return sortDir === 'asc' ? copy : copy.reverse();
+  }, [filtered, sortKey, sortDir]);
+  
+  // This changes the sort direction or column when the user clicks a header
+  const handleSort = (key: SortKey) => {
+    if (key === sortKey) {
+      setSortDir((current) => (current === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortKey(key);
+      setSortDir('asc');
+    }
+  };
+
+  if (isLoading) return <div>Loading results…</div>;
+  if (isError) return <div>Error: {isError}</div>;
 
   return (
-    <div> 
+    <div>
+      {/* Logo */}
+      <div className='logo-container'>
+        <img src={logo} alt='Hertility Health Logo' className='logo' />
+      </div>
+
+      {/* Headings */}
       <h2>Hertility admin dashboard</h2>
       <h1>Hormone results</h1>
 
-      <div className="results">
-        <div className="resultsHeader">
-          <p>result id</p>
-          <p>user id</p>
-          <p>status</p>
-        </div>
-        <div className="resultsList">
-          {
-            results.map(result => {
+      {/* Filter */}
+      <ResultsFilter filter={filter} counts={counts} onChange={setFilter} />
 
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
+      {/* Table */}
+      <ResultsTable
+        rows={sorted}
+        sortKey={sortKey}
+        sortDir={sortDir}
+        onSort={handleSort}
+      />
     </div>
-  )
+  );
 }
-
-export default App
