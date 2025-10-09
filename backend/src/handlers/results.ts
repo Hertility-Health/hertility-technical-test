@@ -6,3 +6,4 @@ export const resultsHandler = async (_req: Request, res: Response) => {
 
     res.send(results);
 };
+

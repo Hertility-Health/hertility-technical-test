@@ -12,6 +12,7 @@ interface Results {
   id: number;
   userId: number;
   hormoneResults: Array<HormoneResults>;
+  determination: string;
 }
 
 const fetchResults = async () => {
@@ -54,7 +55,7 @@ function App() {
                 <div className="resultsItem" key={result.id}>
                     <p>{result.id}</p>
                     <p>{result.userId}</p>
-                    <p></p>
+                    <p>{result.determination}</p>
                 </div>
               )
             })
