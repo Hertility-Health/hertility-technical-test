@@ -20,6 +20,8 @@ function main() {
 
    // api routers
    app.use("/results", resultsRouter); 
+   app.use("/detailedView", resultsRouter); 
+
 
     app.listen(PORT, HOST, () => {
         console.log(`Started API on ${HOST}:${PORT} 🚀 ✨`);
