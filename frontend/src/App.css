@@ -40,3 +40,196 @@
 .read-the-docs {
   color: #888;
 }
+
+.loading-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  margin-top: 1em;
+}
+
+td, th {
+  min-width: 160px;
+  text-align: left;
+}
+
+.table-actions {
+  min-width: 32px;
+}
+
+thead {
+  text-transform: uppercase;
+}
+
+.filters {
+  display: flex;
+  padding: 5px 5px;
+}
+
+.filter-icon {
+  margin-right: 5px;
+}
+
+.filter-dropdown {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: rgba(44, 44, 44, 0.5);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-filter {
+  color: rgba(44, 44, 44, 0.5);
+}
+
+.filter-clear {
+  padding: 5px 10px;
+  color: rgba(3, 55, 90, 0.5);
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease-in-out;
+}
+
+.filter-clear:hover {
+  color: rgba(8, 102, 165, 0.5);
+  cursor: pointer;
+}
+
+.filter-dropdown:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.modal-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+.modal-container {
+  width: fit-content;
+  z-index: 9999;
+  background-color: #FFF;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.modal-header-container {
+  display: flex;
+  
+}
+
+.modal-header-container > h2 {
+  flex: 1 1 auto;
+  color: #000;
+  opacity: 100%;
+  font-weight: bold;
+  text-transform: unset;
+  margin: 0.5rem 0rem;
+}
+
+.modal-header-container > span {
+  font-size: 1.2em;
+  color: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+}
+
+.violation-cell {
+  text-align: center;
+  vertical-align: middle;
+  min-width: 128px!important;
+}
+
+.violation-cell-content {
+  display: flex;
+  flex-flow: column;
+}
+
+.violation-label {
+  font-size: 0.75em;
+  line-height: 1em;
+}
+
+.violation-value {
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 4px;
+  line-height: 0.9em;
+}
+
+.violation-highlight {
+  color: red;
+}
+
+.more-info {
+  border-bottom: 1px dotted black;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  width: 12px;
+
+  transition: font-weight 0.1s ease-in-out;
+}
+
+.more-info:hover {
+  font-weight: bold;
+}
+
+/* Loading spinner from https://cssloaders.github.io/ */
+.loader {
+  display: block;
+  color: #321E37;
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+@keyframes mltShdSpin {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em,
+    0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+    0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%,
+  95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 
+    0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 
+    0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%,
+  59% {
+    box-shadow: 0 -0.83em 0 -0.4em, 
+    -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, 
+    -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+     -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, 
+     -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+     -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, 
+     -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 
+    0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+
+@keyframes round {
+  0% { transform: rotate(0deg) }
+  100% { transform: rotate(360deg) }
+}
+ 
