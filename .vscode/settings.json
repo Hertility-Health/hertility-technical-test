@@ -1,0 +1,22 @@
+{
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always",
+        "source.organizeImports": "always",
+        "source.removeUnusedImports": "always",
+        "source.fixAll.oxc": "always"
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "[typescript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    }
+}
