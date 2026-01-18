@@ -1,3 +1,4 @@
+import { ValidationError } from "../types/errors";
 import { PaginatedResponse, PaginationOptions } from "../types/pagination";
 
 export function paginate<ProcessedResult>(
@@ -21,16 +22,27 @@ export function paginate<ProcessedResult>(
 }
 
 export function getPaginationParams(query: any): PaginationOptions {
-  const page = query.page ? parseInt(query.page, 10) : undefined;
-  const limit = query.limit ? parseInt(query.limit, 10) : undefined;
-
+  let page: number | undefined;
+  let limit: number | undefined;
   let status: boolean | undefined;
 
-  if (!query.status) {
-    return { page, limit };
+  if (query.page !== undefined) {
+    page = parseInt(query.page, 10);
+    if (isNaN(page) || page < 1) {
+      throw new ValidationError("Invalid page parameter: must be a positive integer");
+    }
   }
 
-  status = query.status === "true" || query.status === "1" || query.status === true;
+  if (query.limit !== undefined) {
+    limit = parseInt(query.limit, 10);
+    if (isNaN(limit) || limit < 1 || limit > 100) {
+      throw new ValidationError("Invalid limit parameter: must be between 1 and 100");
+    }
+  }
+
+  if (query.status !== undefined && query.status !== "") {
+    status = query.status === "true" || query.status === "1" || query.status === true;
+  }
 
   return { page, limit, status };
 }
