@@ -35,5 +35,7 @@ export const ProcessedResultsArraySchema = z.array(ProcessedResultSchema);
 
 export type Result = z.infer<typeof ResultSchema>;
 export type ResultStatus = z.infer<typeof ProcessedResultSchema>["status"];
+export type HormoneRange = z.infer<typeof HormoneRangeSchema>;
 export type HormoneRanges = z.infer<typeof HormoneRangesRecordSchema>;
+export type ProcessedHormoneResult = z.infer<typeof ProcessedHormoneResultSchema>;
 export type ProcessedResult = z.infer<typeof ProcessedResultSchema>;

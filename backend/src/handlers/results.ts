@@ -1,8 +1,13 @@
-import { Request, Response } from "express";
-import { fetchResults } from "../services/results";
+import { NextFunction, Request, Response } from "express";
+import { getPaginationParams } from "../helpers/pagination";
+import { fetchProcessedResults } from "../services/results";
 
-export const resultsHandler = async (_req: Request, res: Response) => {
-  const results = await fetchResults();
-
-  res.send(results);
-};
+export async function resultsHandler(req: Request, res: Response, next: NextFunction) {
+  try {
+    const paginationOptions = getPaginationParams(req.query);
+    const results = await fetchProcessedResults(paginationOptions);
+    res.json(results);
+  } catch (error) {
+    next(error);
+  }
+}
