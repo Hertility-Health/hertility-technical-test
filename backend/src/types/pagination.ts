@@ -1,6 +1,7 @@
 export interface PaginationOptions {
   page?: number;
   limit?: number;
+  status?: boolean;
 }
 
 export interface PaginatedResponse<ProcessedResult> {

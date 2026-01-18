@@ -19,7 +19,12 @@ export async function fetchProcessedResults(
   const hormoneResults = await ResultsArraySchema.parseAsync(json.default);
   const hormoneRanges = await HormoneRangesRecordSchema.parseAsync(rangesJson.default);
 
-  const results = processHormoneRanges(hormoneRanges, hormoneResults);
+  let results = processHormoneRanges(hormoneRanges, hormoneResults);
+
+  if (options?.status !== undefined) {
+    const targetStatus = options.status ? "IN RANGE" : "NOT IN RANGE";
+    results = results.filter((result) => result.status === targetStatus);
+  }
 
   return paginate(results, options);
 }

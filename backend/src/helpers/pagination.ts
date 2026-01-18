@@ -24,5 +24,13 @@ export function getPaginationParams(query: any): PaginationOptions {
   const page = query.page ? parseInt(query.page, 10) : undefined;
   const limit = query.limit ? parseInt(query.limit, 10) : undefined;
 
-  return { page, limit };
+  let status: boolean | undefined;
+
+  if (!query.status) {
+    return { page, limit };
+  }
+
+  status = query.status === "true" || query.status === "1" || query.status === true;
+
+  return { page, limit, status };
 }
