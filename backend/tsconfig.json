@@ -14,8 +14,16 @@
     "module": "nodenext",
     "outDir": "dist",
     "sourceMap": true,
-    "lib": ["es2022"],
+    "lib": [
+      "es2022"
+    ],
     "checkJs": true
   },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "src/**/*.test.ts",
+    "node_modules"
+  ]
 }

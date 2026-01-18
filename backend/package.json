@@ -8,13 +8,16 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "dev:run": "node --watch dist/index.js",
+    "dev:run": "node --watch dist/server.js",
     "dev:build": "tsc --watch",
     "dev": "nodemon",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check"
+    "fmt:check": "oxfmt --check",
+    "test": "node --import tsx --test \"src/**/*.test.ts\"",
+    "test:watch": "node --import tsx --test --watch \"src/**/*.test.ts\"",
+    "test:coverage": "node --import tsx --test --experimental-test-coverage \"src/**/*.test.ts\""
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -28,6 +31,7 @@
     "oxfmt": "^0.24.0",
     "oxlint": "^1.39.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "zod": "^4.3.5"
   }
 }
