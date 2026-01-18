@@ -1,5 +1,7 @@
-import { FileSearch, OctagonAlert } from 'lucide-react';
+import { AlertTriangle, FileSearch } from 'lucide-react';
 import { ProcessedHormoneResult } from '../../types';
+import { getHormoneStatus, HormoneStatus, statusStyles } from '../../utils/hormone-status';
+import { ResultsHormoneRangePlot } from './ResultsHormoneRangePlot';
 
 interface HormoneDetailsRowProps {
   hormoneResults: ProcessedHormoneResult[];
@@ -18,53 +20,57 @@ export const ResultsHormoneDetailsRow = ({ hormoneResults, colSpan }: HormoneDet
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {hormoneResults.map((hormone) => {
-              console.log(hormone);
-              const isOutOfRange = hormone.isInRange === false && hormone.value !== null;
-              const hasData = !!hormone.value;
+              const status = getHormoneStatus(hormone.value, hormone.isInRange);
+              const styles = statusStyles[status];
+              const hasData = status !== HormoneStatus.NO_DATA;
 
               return (
-                <div
-                  key={hormone.code}
-                  className={`rounded-lg border p-4 ${
-                    isOutOfRange
-                      ? 'border-orange-200 bg-orange-50'
-                      : hasData
-                      ? 'border-green-200 bg-green-50'
-                      : 'border-slate-100 bg-slate-50'
-                  }`}
+                <div 
+                  key={hormone.code} 
+                  className={`rounded-lg border p-4 ${styles.container}`}
                 >
                   <div className="mb-3 flex items-start justify-between">
                     <div className="text-sm font-semibold text-slate-900">{hormone.code}</div>
-                    {isOutOfRange && (
-                      <div className="inline-flex items-center text-orange-800 gap-1.5 rounded-md bg-orange-200 border-orange-200 px-2 py-1 text-xs font-bold">
-                        <OctagonAlert className="h-3.5 w-3.5" aria-hidden="true" />
-                        Out of Range
+
+                    {status === HormoneStatus.OUT_OF_RANGE && (
+                      <div className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold ${styles.badge}`}>
+                        <AlertTriangle className="h-3.5 w-3.5" aria-hidden="true" />
+                        Needs attention
+                      </div>
+                    )}
+
+                    {status === HormoneStatus.IN_RANGE && (
+                      <div className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-semibold ${styles.badge}`}>
+                        Healthy
                       </div>
                     )}
                   </div>
 
                   {hasData ? (
                     <>
-                      <div className="mb-3">
+                      <div className="mb-3 flex flex-row items-center justify-start gap-2">
                         <div className="text-2xl font-semibold text-slate-900">{hormone.value}</div>
                         <div className="mt-1 text-xs font-medium text-slate-500">{hormone.units}</div>
                       </div>
 
                       {hormone.range && (
-                        <div className="border-t border-slate-200 pt-3">
-                          <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-slate-500">
-                            Normal Range
+                        <div className="space-y-2 border-t border-slate-200 pt-3">
+                          <div className="text-xs font-semibold uppercase tracking-wide text-slate-900">
+                            Expected range
                           </div>
-                          <div className="text-sm font-medium text-slate-700">
-                            {hormone.range.min} - {hormone.range.max}
+                          <div className="text-sm font-medium text-slate-500">
+                            {hormone.range.min} - {hormone.range.max} {hormone.units}
                           </div>
+                          <ResultsHormoneRangePlot
+                            value={hormone.value}
+                            range={hormone.range}
+                            status={status}
+                          />
                         </div>
                       )}
-
-
                     </>
                   ) : (
-                    <div className="py-2 text-sm text-slate-400 italic">No data available</div>
+                    <div className="py-2 text-sm text-slate-400 italic">No data recorded yet.</div>
                   )}
                 </div>
               );
