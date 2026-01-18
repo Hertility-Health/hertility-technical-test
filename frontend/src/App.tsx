@@ -1,68 +1,59 @@
-import { useEffect } from 'react';
-import './App.css'
-import React from 'react';
-
-interface HormoneResults {
-  code: string;
-  units: string;
-  value: number;
-}
-
-interface Results {
-  id: number;
-  userId: number;
-  hormoneResults: Array<HormoneResults>;
-}
-
-const fetchResults = async () => {
-  try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
-  } catch (error) {
-    console.error(error)
-  }
-  return []
-}
+import { ExpandedState, getCoreRowModel, getExpandedRowModel, useReactTable } from '@tanstack/react-table';
+import { useMemo, useState } from 'react';
+import { PageControls } from './components/Layout/PageControls';
+import { PageHeader } from './components/Layout/PageHeader';
+import { LoadingSpinner } from './components/Loading/LoadingSpinner';
+import { Pagination } from './components/Pagination/Pagination';
+import { ResultsTable } from './components/ResultsTable/ResultsTable';
+import { getColumns } from './components/ResultsTable/ResultsTableColumns';
+import { useResults } from './hooks/useResult';
 
 function App() {
+  const { results, pagination, loading, handlePageChange, handleLimitChange } = useResults();
+  const [expanded, setExpanded] = useState<ExpandedState>({});
 
-  const [results, setResults] = React.useState<Results[]>([])
+  const columns = useMemo(() => getColumns(), []);
 
-  useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+  const table = useReactTable({
+    data: results,
+    columns,
+    state: { expanded },
+    onExpandedChange: setExpanded,
+    getCoreRowModel: getCoreRowModel(),
+    getExpandedRowModel: getExpandedRowModel(),
+    getRowCanExpand: () => true,
+    manualPagination: true,
+    pageCount: pagination.totalPages,
+  });
 
   return (
-    <div> 
-      <h2>Hertility admin dashboard</h2>
-      <h1>Hormone results</h1>
+    <div className="min-h-screen w-full bg-slate-50 text-slate-900">
+      <div className="mx-auto w-full max-w-none px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+        <PageHeader />
 
-      <div className="results">
-        <div className="resultsHeader">
-          <p>result id</p>
-          <p>user id</p>
-          <p>status</p>
+        <div className="mt-6">
+          <PageControls
+            pagination={pagination}
+            onLimitChange={handleLimitChange}
+            resultsCount={results.length}
+          />
         </div>
-        <div className="resultsList">
-          {
-            results.map(result => {
 
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
+        <div className="mt-4">
+          {loading ? (
+            <div className="flex justify-center items-center min-h-[12rem]">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <ResultsTable table={table} columnsLength={columns.length} />
+          )}
         </div>
       </div>
+      <div className="mx-auto w-full max-w-none px-4 sm:px-6 lg:px-8 py-3">
+        <Pagination pagination={pagination} onPageChange={handlePageChange} />
+      </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
