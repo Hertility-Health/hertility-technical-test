@@ -5,8 +5,18 @@ import { PaginatedResponse } from "../types";
 export const fetchResults = async (
   page: number = 1,
   limit: number = 10,
+  status?: boolean,
 ): Promise<PaginatedResponse> => {
-  const res = await fetch(`http://localhost:52863/results?page=${page}&limit=${limit}`);
+  const params = new URLSearchParams({
+    page: page.toString(),
+    limit: limit.toString(),
+  });
+
+  if (status !== undefined) {
+    params.append("status", status ? "1" : "0");
+  }
+
+  const res = await fetch(`http://localhost:52863/results?${params}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch results");
@@ -18,10 +28,11 @@ export const fetchResults = async (
 export const useResults = () => {
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
+  const [statusFilter, setStatusFilter] = useState<boolean | undefined>();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["results", page, limit],
-    queryFn: () => fetchResults(page, limit),
+    queryKey: ["results", page, limit, statusFilter],
+    queryFn: () => fetchResults(page, limit, statusFilter),
   });
 
   const handlePageChange = useCallback(
@@ -38,12 +49,19 @@ export const useResults = () => {
     setPage(1);
   }, []);
 
+  const handleStatusFilterChange = useCallback((status: boolean | undefined) => {
+    setStatusFilter(status);
+    setPage(1);
+  }, []);
+
   return {
     results: data?.data ?? [],
     pagination: data?.pagination ?? { page: 1, limit: 10, total: 0, totalPages: 0 },
     loading: isLoading,
     error,
+    statusFilter,
     handlePageChange,
     handleLimitChange,
+    handleStatusFilterChange,
   };
 };

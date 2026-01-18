@@ -9,7 +9,15 @@ import { getColumns } from './components/ResultsTable/ResultsTableColumns';
 import { useResults } from './hooks/useResult';
 
 function App() {
-  const { results, pagination, loading, handlePageChange, handleLimitChange } = useResults();
+const { 
+  results, 
+  pagination, 
+  loading, 
+  statusFilter,
+  handlePageChange, 
+  handleLimitChange,
+  handleStatusFilterChange 
+} = useResults();
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const columns = useMemo(() => getColumns(), []);
@@ -35,6 +43,8 @@ function App() {
           <PageControls
             pagination={pagination}
             onLimitChange={handleLimitChange}
+            statusFilter={statusFilter}
+            onStatusFilterChange={handleStatusFilterChange}
             resultsCount={results.length}
           />
         </div>

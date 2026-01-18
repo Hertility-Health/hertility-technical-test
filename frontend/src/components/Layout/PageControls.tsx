@@ -1,10 +1,14 @@
+import { StatusFilter } from "../Filters/StatusFilter";
+
 type PageControlsProps = {
-  pagination: { limit: number; total: number };
+  pagination: { limit: number; total: number, page: number; totalPages: number };
   onLimitChange: (limit: number) => void;
   resultsCount: number;
+  statusFilter: boolean | undefined;
+  onStatusFilterChange: (status: boolean | undefined) => void;
 };
 
-export function PageControls({ pagination, onLimitChange, resultsCount }: PageControlsProps) {
+export function PageControls({ pagination, onLimitChange, resultsCount, statusFilter, onStatusFilterChange }: PageControlsProps) {
   return (
     <section className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex items-center gap-3">
@@ -24,6 +28,8 @@ export function PageControls({ pagination, onLimitChange, resultsCount }: PageCo
           ))}
         </select>
       </div>
+
+      <StatusFilter value={statusFilter} onChange={onStatusFilterChange} />
 
       <div className="text-sm text-slate-600">
         Showing <span className="font-semibold text-slate-900">{resultsCount}</span> of{' '}
