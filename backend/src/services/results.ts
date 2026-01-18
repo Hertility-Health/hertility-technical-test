@@ -1,4 +1,4 @@
-import { processHormoneRanges } from "../helpers/hormone-processor";
+import { processHormoneRangesComplete } from "../helpers/hormone-processor";
 import { paginate } from "../helpers/pagination";
 import { PaginatedResponse, PaginationOptions } from "../types/pagination";
 import {
@@ -19,7 +19,8 @@ export async function fetchProcessedResults(
   const hormoneResults = await ResultsArraySchema.parseAsync(json.default);
   const hormoneRanges = await HormoneRangesRecordSchema.parseAsync(rangesJson.default);
 
-  let results = processHormoneRanges(hormoneRanges, hormoneResults);
+  // let results = processHormoneRanges(hormoneRanges, hormoneResults);
+  let results = processHormoneRangesComplete(hormoneRanges, hormoneResults);
 
   if (options?.status !== undefined) {
     const targetStatus = options.status ? "IN RANGE" : "NOT IN RANGE";
