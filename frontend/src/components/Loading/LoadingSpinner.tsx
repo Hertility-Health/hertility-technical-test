@@ -6,7 +6,9 @@ export const LoadingSpinner = () => {
         role="status"
         aria-label="Loading"
       />
-      <p className="mt-4 text-sm font-medium text-slate-600">Loading results...</p>
+      <p className="mt-4 text-sm font-medium text-slate-600">
+        Loading results...
+      </p>
     </div>
   );
 };

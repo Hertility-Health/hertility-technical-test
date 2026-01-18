@@ -1,15 +1,19 @@
-import * as Plot from '@observablehq/plot';
-import { useEffect, useRef } from 'react';
-import { ProcessedHormoneResult } from '../../types';
-import { HormoneStatusType, statusStyles } from '../../utils/hormone-status';
+import * as Plot from "@observablehq/plot";
+import { useEffect, useRef } from "react";
+import { ProcessedHormoneResult } from "../../types";
+import { HormoneStatusType, statusStyles } from "../../utils/hormone-status";
 
 type ResultsHormoneRangePlotProps = {
-  value: ProcessedHormoneResult['value'];
-  range: ProcessedHormoneResult['range'];
+  value: ProcessedHormoneResult["value"];
+  range: ProcessedHormoneResult["range"];
   status: HormoneStatusType;
 };
 
-export const ResultsHormoneRangePlot = ({ value, range, status }: ResultsHormoneRangePlotProps) => {
+export const ResultsHormoneRangePlot = ({
+  value,
+  range,
+  status,
+}: ResultsHormoneRangePlotProps) => {
   const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -35,39 +39,36 @@ export const ResultsHormoneRangePlot = ({ value, range, status }: ResultsHormone
         domain: [minDomain - pad, maxDomain + pad],
         nice: true,
         label: null,
-        axis: 'bottom',
+        axis: "bottom",
         ticks: 4,
       },
       y: { axis: null },
       marks: [
-        Plot.barX(
-          [{ label: 'range', min: range.min, max: range.max }],
-          {
-            y: 'label',
-            x1: 'min',
-            x2: 'max',
-            rx: 6,
-            inset: 8,
-            fill: color,
-            fillOpacity: 0.2,
-            stroke: color,
-            strokeOpacity: 0.4,
-          }
-        ),
+        Plot.barX([{ label: "range", min: range.min, max: range.max }], {
+          y: "label",
+          x1: "min",
+          x2: "max",
+          rx: 6,
+          inset: 8,
+          fill: color,
+          fillOpacity: 0.2,
+          stroke: color,
+          strokeOpacity: 0.4,
+        }),
         hasValue
-          ? Plot.dot(
-              [{ label: 'range', value }],
-              {
-                y: 'label',
-                x: 'value',
-                r: 5.5,
-                fill: color,
-                stroke: 'white',
-                strokeWidth: 1,
-              }
-            )
+          ? Plot.dot([{ label: "range", value }], {
+              y: "label",
+              x: "value",
+              r: 5.5,
+              fill: color,
+              stroke: "white",
+              strokeWidth: 1,
+            })
           : null,
-        Plot.ruleX([range.min, range.max], { stroke: '#cbd5f5', strokeOpacity: 0.5 }),
+        Plot.ruleX([range.min, range.max], {
+          stroke: "#cbd5f5",
+          strokeOpacity: 0.5,
+        }),
       ].filter(Boolean),
     });
 

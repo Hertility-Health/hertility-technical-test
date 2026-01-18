@@ -1,11 +1,13 @@
-import { flexRender, HeaderGroup } from '@tanstack/react-table';
-import { ProcessedResult } from '../../types';
+import { flexRender, HeaderGroup } from "@tanstack/react-table";
+import { ProcessedResult } from "../../types";
 
 interface ResultsTableHeaderProps {
   headerGroups: HeaderGroup<ProcessedResult>[];
 }
 
-export const ResultsTableHeader = ({ headerGroups }: ResultsTableHeaderProps) => {
+export const ResultsTableHeader = ({
+  headerGroups,
+}: ResultsTableHeaderProps) => {
   return (
     <thead className="bg-slate-50">
       {headerGroups.map((headerGroup) => (
@@ -18,7 +20,10 @@ export const ResultsTableHeader = ({ headerGroups }: ResultsTableHeaderProps) =>
             >
               {header.isPlaceholder
                 ? null
-                : flexRender(header.column.columnDef.header, header.getContext())}
+                : flexRender(
+                    header.column.columnDef.header,
+                    header.getContext(),
+                  )}
             </th>
           ))}
         </tr>

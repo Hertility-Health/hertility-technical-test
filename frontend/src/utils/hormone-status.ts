@@ -4,7 +4,8 @@ export const HormoneStatus = {
   NO_DATA: "NO_DATA",
 } as const;
 
-export type HormoneStatusType = (typeof HormoneStatus)[keyof typeof HormoneStatus];
+export type HormoneStatusType =
+  (typeof HormoneStatus)[keyof typeof HormoneStatus];
 
 export const getHormoneStatus = (
   value: number | null | undefined,

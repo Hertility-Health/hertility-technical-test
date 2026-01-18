@@ -1,23 +1,28 @@
-import { ExpandedState, getCoreRowModel, getExpandedRowModel, useReactTable } from '@tanstack/react-table';
-import { useMemo, useState } from 'react';
-import { PageControls } from './components/Layout/PageControls';
-import { PageHeader } from './components/Layout/PageHeader';
-import { LoadingSpinner } from './components/Loading/LoadingSpinner';
-import { Pagination } from './components/Pagination/Pagination';
-import { ResultsTable } from './components/ResultsTable/ResultsTable';
-import { getColumns } from './components/ResultsTable/ResultsTableColumns';
-import { useResults } from './hooks/useResult';
+import {
+  ExpandedState,
+  getCoreRowModel,
+  getExpandedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import { useMemo, useState } from "react";
+import { PageControls } from "./components/Layout/PageControls";
+import { PageHeader } from "./components/Layout/PageHeader";
+import { LoadingSpinner } from "./components/Loading/LoadingSpinner";
+import { Pagination } from "./components/Pagination/Pagination";
+import { ResultsTable } from "./components/ResultsTable/ResultsTable";
+import { getColumns } from "./components/ResultsTable/ResultsTableColumns";
+import { useResults } from "./hooks/useResult";
 
 function App() {
-const { 
-  results, 
-  pagination, 
-  loading, 
-  statusFilter,
-  handlePageChange, 
-  handleLimitChange,
-  handleStatusFilterChange 
-} = useResults();
+  const {
+    results,
+    pagination,
+    loading,
+    statusFilter,
+    handlePageChange,
+    handleLimitChange,
+    handleStatusFilterChange,
+  } = useResults();
   const [expanded, setExpanded] = useState<ExpandedState>({});
 
   const columns = useMemo(() => getColumns(), []);

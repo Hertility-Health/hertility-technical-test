@@ -1,8 +1,8 @@
-import { Table } from '@tanstack/react-table';
-import { Inbox } from 'lucide-react';
-import { ProcessedResult } from '../../types';
-import { ResultsTableHeader } from './ResultsTableHeader';
-import { ResultsTableRow } from './ResultsTableRow';
+import { Table } from "@tanstack/react-table";
+import { Inbox } from "lucide-react";
+import { ProcessedResult } from "../../types";
+import { ResultsTableHeader } from "./ResultsTableHeader";
+import { ResultsTableRow } from "./ResultsTableRow";
 
 interface ResultsTableProps {
   table: Table<ProcessedResult>;
@@ -18,17 +18,29 @@ export const ResultsTable = ({ table, columnsLength }: ResultsTableProps) => {
           <tbody className="divide-y divide-slate-100">
             {table.getRowModel().rows.length === 0 ? (
               <tr>
-                <td colSpan={columnsLength} className="px-6 py-16 text-center text-slate-500">
+                <td
+                  colSpan={columnsLength}
+                  className="px-6 py-16 text-center text-slate-500"
+                >
                   <div className="flex flex-col items-center gap-3">
-                      <Inbox className="h-10 w-10 text-slate-300" aria-hidden="true" />
+                    <Inbox
+                      className="h-10 w-10 text-slate-300"
+                      aria-hidden="true"
+                    />
                     <p className="text-sm font-medium">No results found</p>
                   </div>
                 </td>
               </tr>
             ) : (
-              table.getRowModel().rows.map((row) => (
-                <ResultsTableRow key={row.id} row={row} columnsLength={columnsLength} />
-              ))
+              table
+                .getRowModel()
+                .rows.map((row) => (
+                  <ResultsTableRow
+                    key={row.id}
+                    row={row}
+                    columnsLength={columnsLength}
+                  />
+                ))
             )}
           </tbody>
         </table>

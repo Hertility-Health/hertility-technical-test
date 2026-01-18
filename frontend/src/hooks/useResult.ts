@@ -49,14 +49,22 @@ export const useResults = () => {
     setPage(1);
   }, []);
 
-  const handleStatusFilterChange = useCallback((status: boolean | undefined) => {
-    setStatusFilter(status);
-    setPage(1);
-  }, []);
+  const handleStatusFilterChange = useCallback(
+    (status: boolean | undefined) => {
+      setStatusFilter(status);
+      setPage(1);
+    },
+    [],
+  );
 
   return {
     results: data?.data ?? [],
-    pagination: data?.pagination ?? { page: 1, limit: 10, total: 0, totalPages: 0 },
+    pagination: data?.pagination ?? {
+      page: 1,
+      limit: 10,
+      total: 0,
+      totalPages: 0,
+    },
     loading: isLoading,
     error,
     statusFilter,

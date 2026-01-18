@@ -5,13 +5,18 @@
         "source.removeUnusedImports": "always",
         "source.fixAll.oxc": "always"
     },
-    "[javascript]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode",
-        "editor.formatOnSave": true
-    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "oxc.oxc-vscode",
     "[typescript]": {
-        "editor.defaultFormatter": "oxc.oxc-vscode",
-        "editor.formatOnSave": true
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     },
-    "editor.formatOnSave": true
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
+    }
 }

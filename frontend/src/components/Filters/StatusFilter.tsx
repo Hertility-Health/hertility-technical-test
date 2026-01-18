@@ -6,7 +6,10 @@ interface StatusFilterProps {
 export const StatusFilter = ({ value, onChange }: StatusFilterProps) => {
   return (
     <div className="flex items-center gap-3">
-      <label htmlFor="status-filter" className="text-sm font-medium text-slate-700">
+      <label
+        htmlFor="status-filter"
+        className="text-sm font-medium text-slate-700"
+      >
         Filter by Status:
       </label>
       <select
