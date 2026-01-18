@@ -56,7 +56,7 @@ function App() {
 
         <div className="mt-4">
           {loading ? (
-            <div className="flex justify-center items-center min-h-[12rem]">
+            <div className="flex justify-center items-center min-h-48">
               <LoadingSpinner />
             </div>
           ) : (
