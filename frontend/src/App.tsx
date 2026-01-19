@@ -1,9 +1,35 @@
-import { useEffect } from 'react';
-import './App.css'
-import React from 'react';
+import React, { useEffect } from "react";
+import "./App.css";
+
+// Zoe: Improved type safety around hormones
+type HormoneCode =
+  | "AMH"
+  | "FT4"
+  | "PROL"
+  | "OEST"
+  | "FSH"
+  | "LH"
+  | "TEST"
+  | "SHBG";
+
+type HormoneRange = {
+  min: number;
+  max: number;
+};
+
+const NORMAL_RANGES: Record<HormoneCode, HormoneRange> = {
+  AMH: { min: 7.14, max: 95 },
+  FT4: { min: 12, max: 22 },
+  PROL: { min: 102, max: 496 },
+  OEST: { min: 45, max: 854 },
+  FSH: { min: 6, max: 12.5 },
+  LH: { min: 2.4, max: 12.6 },
+  TEST: { min: 0.5, max: 2 },
+  SHBG: { min: 32.4, max: 128 },
+};
 
 interface HormoneResults {
-  code: string;
+  code: HormoneCode;
   units: string;
   value: number;
 }
@@ -11,32 +37,33 @@ interface HormoneResults {
 interface Results {
   id: number;
   userId: number;
-  hormoneResults: Array<HormoneResults>;
+  hormoneResults: HormoneResults[];
 }
 
 const fetchResults = async () => {
   try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
+    const res = await fetch("http://localhost:52863/results");
+    const json = await res.json();
+    return json as Results[];
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-  return []
-}
+  return [];
+};
 
 function App() {
-
-  const [results, setResults] = React.useState<Results[]>([])
+  const [results, setResults] = React.useState<Results[]>([]);
 
   useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+    fetchResults().then((results) => {
+      setResults(results);
+    });
+  }, []);
+
+  console.log(results);
 
   return (
-    <div> 
+    <div>
       <h2>Hertility admin dashboard</h2>
       <h1>Hormone results</h1>
 
@@ -47,22 +74,19 @@ function App() {
           <p>status</p>
         </div>
         <div className="resultsList">
-          {
-            results.map(result => {
-
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
+          {results.map((result) => {
+            return (
+              <div className="resultsItem" key={result.id}>
+                <p>{result.id}</p>
+                <p>{result.userId}</p>
+                <p></p>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
