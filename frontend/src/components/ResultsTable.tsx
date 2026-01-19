@@ -2,6 +2,7 @@ import { useState } from "react";
 import { HORMONE_CODES } from "../consts/hormones";
 import { Results, Status } from "../consts/types";
 import { addResultStatus, getHormoneValue } from "../utils/hormones";
+import { FilterDropdown } from "./FilterDropdown";
 
 interface ResultsTableProps {
   results: Results[];
@@ -19,18 +20,7 @@ export const ResultsTable = ({ results }: ResultsTableProps) => {
 
   return (
     <>
-      {/* Filter dropdown */}
-      <label>
-        Filter by status:
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value as Status | "ALL")}
-        >
-          <option value="ALL">All</option>
-          <option value="IN RANGE">IN RANGE</option>
-          <option value="NOT IN RANGE">NOT IN RANGE</option>
-        </select>
-      </label>
+      <FilterDropdown value={filter} onChange={setFilter} />
       <div className="results">
         <div className="resultsHeader">
           <p>result id</p>
