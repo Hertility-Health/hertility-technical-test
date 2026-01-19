@@ -5,3 +5,5 @@ export interface Results {
   userId: number;
   hormoneResults: HormoneResults[];
 }
+
+export type Status = "IN RANGE" | "NOT IN RANGE";

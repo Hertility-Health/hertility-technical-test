@@ -1,6 +1,6 @@
 import { HORMONE_CODES } from "../consts/hormones";
 import { Results } from "../consts/types";
-import { getHormoneValue } from "../hooks/useHormoneUtils";
+import { getHormoneValue, getResultStatus } from "../utils/hormones";
 
 interface ResultsTableProps {
   results: Results[];
@@ -24,7 +24,7 @@ export const ResultsTable = ({ results }: ResultsTableProps) => {
           <div className="resultsItem" key={result.id}>
             <p>{result.id}</p>
             <p>{result.userId}</p>
-            <p>status</p>
+            <p>{getResultStatus(result.hormoneResults)}</p>
 
             {HORMONE_CODES.map((code) => (
               <p key={code}>{getHormoneValue(result.hormoneResults, code)}</p>
