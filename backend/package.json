@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "dev:run": "node --watch dist/index.js",
     "dev:build": "tsc --watch",
-    "dev": "npm run dev:build & npm run dev:run"
+    "dev": "npm run build && npm run dev:build & npm run dev:run"
   },
   "keywords": [],
   "author": "",
