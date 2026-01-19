@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+// Zoe TODO: Create shared repo for shared types/const to remove duplication
 interface HormoneResults {
   code: string;
   units: string;
@@ -28,6 +29,8 @@ export async function fetchResults(): Promise<Results[]> {
   const filePath = path.resolve("src/data/results.json");
   const raw = await fs.readFile(filePath, "utf-8");
   const results: Results[] = JSON.parse(raw);
+
+  // Zoe TODO: Move status/diff logic in here from frontend for scalability
 
   return results;
 }
