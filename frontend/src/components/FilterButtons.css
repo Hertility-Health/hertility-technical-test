@@ -1,0 +1,125 @@
+.filterContainer {
+  margin: 2rem 0;
+  padding: 2rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e9ecef;
+}
+
+.filterHeader {
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  margin: 0 0 0.25rem 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filterSubtitle {
+  margin: 0;
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.filterButtonsGroup {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.filterButton {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border: 2px solid #dee2e6;
+  background-color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  color: #495057;
+  position: relative;
+  overflow: hidden;
+}
+
+.filterButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(100, 108, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.filterButton:hover::before {
+  left: 100%;
+}
+
+.filterButton:hover {
+  border-color: #646cff;
+  background-color: #f8f9ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.15);
+}
+
+.filterButton.active {
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  border-color: #535bf2;
+  color: white;
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.3);
+}
+
+.filterButton.active:hover {
+  background: linear-gradient(135deg, #535bf2 0%, #4248d4 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(100, 108, 255, 0.4);
+}
+
+.buttonIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.buttonText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  flex: 1;
+}
+
+.buttonLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.buttonCount {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.filterButton.active .buttonCount {
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .filterButtonsGroup {
+    grid-template-columns: 1fr;
+  }
+
+  .filterButton {
+    justify-content: center;
+  }
+}

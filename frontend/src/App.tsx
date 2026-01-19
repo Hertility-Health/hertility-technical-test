@@ -1,68 +1,128 @@
-import { useEffect } from 'react';
-import './App.css'
-import React from 'react';
+import { useEffect, useMemo, useState } from "react";
+import { Results, FilterOption } from "./types";
+import { checkResultsStatus } from "./utils/hormoneValidation";
+import { FilterButtons } from "./components/FilterButtons";
+import { ResultRow } from "./components/ResultRow";
+import "./App.css";
 
-interface HormoneResults {
-  code: string;
-  units: string;
-  value: number;
-}
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:52863";
 
-interface Results {
-  id: number;
-  userId: number;
-  hormoneResults: Array<HormoneResults>;
-}
-
-const fetchResults = async () => {
+/**
+ * Fetches results from the backend API
+ */
+const fetchResults = async (): Promise<Results[]> => {
   try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
+    const response = await fetch(`${API_BASE_URL}/results`);
+    const data = await response.json();
+    return data as Results[];
   } catch (error) {
-    console.error(error)
+    console.error("Failed to fetch results:", error);
+    return [];
   }
-  return []
-}
+};
 
 function App() {
+  const [results, setResults] = useState<Results[]>([]);
+  const [filter, setFilter] = useState<FilterOption>("ALL");
+  const [isLoading, setIsLoading] = useState(true);
 
-  const [results, setResults] = React.useState<Results[]>([])
-
+  // Fetch results on mount
   useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+    const loadResults = async () => {
+      setIsLoading(true);
+      const data = await fetchResults();
+      setResults(data);
+      setIsLoading(false);
+    };
+
+    loadResults();
+  }, []);
+
+  // Filter results based on selected filter
+  const filteredResults = useMemo(() => {
+    if (filter === "ALL") return results;
+
+    return results.filter((result) => {
+      const status = checkResultsStatus(result.hormoneResults);
+      return status === filter;
+    });
+  }, [results, filter]);
+
+  // Calculate counts for filter buttons
+  const resultCounts = useMemo(() => {
+    const inRangeCount = results.filter(
+      (result) => checkResultsStatus(result.hormoneResults) === "IN RANGE"
+    ).length;
+
+    return {
+      all: results.length,
+      inRange: inRangeCount,
+      notInRange: results.length - inRangeCount,
+    };
+  }, [results]);
 
   return (
-    <div> 
-      <h2>Hertility admin dashboard</h2>
-      <h1>Hormone results</h1>
-
-      <div className="results">
-        <div className="resultsHeader">
-          <p>result id</p>
-          <p>user id</p>
-          <p>status</p>
+    <div className="appContainer">
+      <header className="appHeader">
+        <div className="headerContent">
+          <h1 className="appTitle">Hertility Health Dashboard</h1>
+          <span className="headerDivider">|</span>
+          <p className="appSubtitle">
+            Hormone Results Analysis
+          </p>
         </div>
-        <div className="resultsList">
-          {
-            results.map(result => {
+      </header>
 
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
+      <main className="appMain">
+        <FilterButtons
+          activeFilter={filter}
+          onFilterChange={setFilter}
+          resultCounts={resultCounts}
+        />
+
+        <section className="resultsSection">
+          <div className="sectionHeader">
+            <h2 className="sectionTitle">
+              {filter === "ALL" && `All Test Results (${filteredResults.length})`}
+              {filter === "IN RANGE" && `✅ Results In Range (${filteredResults.length})`}
+              {filter === "NOT IN RANGE" && `⚠️ Results Needing Review (${filteredResults.length})`}
+            </h2>
+            {filter !== "ALL" && (
+              <button
+                className="clearFilterButton"
+                onClick={() => setFilter("ALL")}
+              >
+                Clear Filter
+              </button>
+            )}
+          </div>
+
+          {isLoading ? (
+            <div className="loadingContainer">
+              <div className="spinner"></div>
+              <p>Loading results...</p>
+            </div>
+          ) : filteredResults.length === 0 ? (
+            <div className="emptyState">
+              <p className="emptyStateIcon">📭</p>
+              <p className="emptyStateTitle">No results found</p>
+              <p className="emptyStateText">
+                {filter === "ALL"
+                  ? "No test results available"
+                  : `No results matching "${filter}" status`}
+              </p>
+            </div>
+          ) : (
+            <div className="resultsList">
+              {filteredResults.map((result) => (
+                <ResultRow key={result.id} result={result} />
+              ))}
+            </div>
+          )}
+        </section>
+      </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
