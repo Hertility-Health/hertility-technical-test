@@ -5,26 +5,25 @@ import {
 } from "../consts/hormones";
 import { Results, ResultsWithStatus } from "../consts/types";
 
-export const getHormoneValue = (
+export const getHormoneValueWithDiff = (
   hormoneResults: HormoneResults[],
   code: HormoneCode
-): string => {
+) => {
   const hormone = hormoneResults.find((h) => h.code === code);
-  if (!hormone) return "—";
+  if (!hormone) return { display: "—", diff: 0 };
 
+  const { value } = hormone;
   const range = HORMONE_RANGES[code];
 
-  if (hormone.value < range.min) {
-    const diff = (range.min - hormone.value).toFixed(2);
-    return `${hormone.value} (-${diff})`;
-  }
+  let diff = 0;
+  if (value < range.min) diff = value - range.min;
+  else if (value > range.max) diff = value - range.max;
 
-  if (hormone.value > range.max) {
-    const diff = (hormone.value - range.max).toFixed(2);
-    return `${hormone.value} (+${diff})`;
-  }
-
-  return `${hormone.value}`;
+  const display =
+    diff === 0
+      ? `${value.toFixed(2)}`
+      : `${value.toFixed(2)} (${diff > 0 ? "+" : ""}${diff.toFixed(2)})`;
+  return { display, diff };
 };
 
 export const isHormoneInRange = (hormone: HormoneResults): boolean => {

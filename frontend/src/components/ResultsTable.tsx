@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { HORMONE_CODES } from "../consts/hormones";
 import { Results, Status } from "../consts/types";
-import { addResultStatus, getHormoneValue } from "../utils/hormones";
+import { addResultStatus, getHormoneValueWithDiff } from "../utils/hormones";
 import { FilterDropdown } from "./FilterDropdown";
 
 interface ResultsTableProps {
@@ -38,9 +38,20 @@ export const ResultsTable = ({ results }: ResultsTableProps) => {
               <p>{result.id}</p>
               <p>{result.userId}</p>
               <p>{result.status}</p>
-              {HORMONE_CODES.map((code) => (
-                <p key={code}>{getHormoneValue(result.hormoneResults, code)}</p>
-              ))}
+              {HORMONE_CODES.map((code) => {
+                const { display, diff } = getHormoneValueWithDiff(
+                  result.hormoneResults,
+                  code
+                );
+                return (
+                  <p
+                    key={code}
+                    className={diff !== 0 ? "resultsItemNotInRange" : ""}
+                  >
+                    {display}
+                  </p>
+                );
+              })}
             </div>
           ))}
         </div>
