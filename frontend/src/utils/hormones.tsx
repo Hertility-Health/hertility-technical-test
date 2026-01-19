@@ -3,7 +3,7 @@ import {
   HormoneCode,
   HormoneResults,
 } from "../consts/hormones";
-import { Status } from "../consts/types";
+import { Results, ResultsWithStatus } from "../consts/types";
 
 export const getHormoneValue = (
   hormoneResults: HormoneResults[],
@@ -17,7 +17,11 @@ export const isHormoneInRange = (hormone: HormoneResults): boolean => {
   return hormone.value >= range.min && hormone.value <= range.max;
 };
 
-export const getResultStatus = (hormoneResults: HormoneResults[]): Status => {
-  const allInRange = hormoneResults.every(isHormoneInRange);
-  return allInRange ? "IN RANGE" : "NOT IN RANGE";
+export const addResultStatus = (results: Results[]): ResultsWithStatus[] => {
+  return results.map((r) => ({
+    ...r,
+    status: r.hormoneResults.every(isHormoneInRange)
+      ? "IN RANGE"
+      : "NOT IN RANGE",
+  }));
 };

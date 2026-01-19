@@ -7,3 +7,5 @@ export interface Results {
 }
 
 export type Status = "IN RANGE" | "NOT IN RANGE";
+
+export type ResultsWithStatus = Results & { status: Status };
