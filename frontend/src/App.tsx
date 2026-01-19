@@ -1,68 +1,21 @@
-import { useEffect } from 'react';
-import './App.css'
-import React from 'react';
-
-interface HormoneResults {
-  code: string;
-  units: string;
-  value: number;
-}
-
-interface Results {
-  id: number;
-  userId: number;
-  hormoneResults: Array<HormoneResults>;
-}
-
-const fetchResults = async () => {
-  try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
-  } catch (error) {
-    console.error(error)
-  }
-  return []
-}
+import "./App.css";
+import { ResultsTable } from "./components/ResultsTable";
+import { useResults } from "./hooks/useResults";
 
 function App() {
+  const { results, loading, error } = useResults();
 
-  const [results, setResults] = React.useState<Results[]>([])
-
-  useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+  if (loading) return <p>Loading results…</p>;
+  if (error) return <p>Error fetching results: {error.message}</p>;
 
   return (
-    <div> 
+    <div>
       <h2>Hertility admin dashboard</h2>
       <h1>Hormone results</h1>
 
-      <div className="results">
-        <div className="resultsHeader">
-          <p>result id</p>
-          <p>user id</p>
-          <p>status</p>
-        </div>
-        <div className="resultsList">
-          {
-            results.map(result => {
-
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
+      <ResultsTable results={results} />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

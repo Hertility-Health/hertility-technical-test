@@ -26,7 +26,7 @@ h2 {
 }
 
 .results {
-  width: fit-content; 
+  width: fit-content;
   margin: 0 auto;
 }
 
@@ -47,11 +47,18 @@ h2 {
   gap: 10px;
 }
 
+.resultsList .resultsItem:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.resultsList .resultsItem:nth-child(odd) {
+  background-color: #e6e6e6;
+}
+
 .resultsItem {
   display: flex;
   justify-content: space-between;
   padding-left: 10px;
-  background-color: #e6e6e6;
   border-radius: 6px;
   box-shadow: #929292 0px 0px 4px;
 }
@@ -60,4 +67,43 @@ h2 {
   width: 200px;
   text-align: left;
   text-transform: uppercase;
+}
+
+.resultsItemNotInRange {
+  color: red;
+  font-weight: 600;
+}
+
+/* Filter dropdown */
+.filterDropdownWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+/* Label styling */
+.filterLabel {
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterSelect {
+  padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  min-width: 120px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 3px rgba(0, 123, 255, 0.5);
 }
