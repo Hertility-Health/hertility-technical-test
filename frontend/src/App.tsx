@@ -2,15 +2,18 @@ import React, { useEffect } from "react";
 import "./App.css";
 
 // Zoe: Improved type safety around hormones
-type HormoneCode =
-  | "AMH"
-  | "FT4"
-  | "PROL"
-  | "OEST"
-  | "FSH"
-  | "LH"
-  | "TEST"
-  | "SHBG";
+const HORMONE_CODES = [
+  "AMH",
+  "FT4",
+  "PROL",
+  "OEST",
+  "FSH",
+  "LH",
+  "TEST",
+  "SHBG",
+] as const;
+
+type HormoneCode = (typeof HORMONE_CODES)[number];
 
 type HormoneRange = {
   min: number;
@@ -51,6 +54,13 @@ const fetchResults = async () => {
   return [];
 };
 
+const getHormoneValue = (
+  hormoneResults: HormoneResults[],
+  code: HormoneCode
+) => {
+  return hormoneResults.find((h) => h.code === code)?.value ?? "—";
+};
+
 function App() {
   const [results, setResults] = React.useState<Results[]>([]);
 
@@ -72,6 +82,10 @@ function App() {
           <p>result id</p>
           <p>user id</p>
           <p>status</p>
+
+          {HORMONE_CODES.map((code) => (
+            <p key={code}>{code}</p>
+          ))}
         </div>
         <div className="resultsList">
           {results.map((result) => {
@@ -79,7 +93,13 @@ function App() {
               <div className="resultsItem" key={result.id}>
                 <p>{result.id}</p>
                 <p>{result.userId}</p>
-                <p></p>
+                <p>status</p>
+
+                {HORMONE_CODES.map((code) => (
+                  <p key={code}>
+                    {getHormoneValue(result.hormoneResults, code)}
+                  </p>
+                ))}
               </div>
             );
           })}
