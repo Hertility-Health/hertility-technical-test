@@ -1,0 +1,23 @@
+import { HormoneRange } from "../types";
+
+export const HORMONE_RANGES: Record<string, HormoneRange> = {
+  AMH: { min: 7.14, max: 95 },
+  FT4: { min: 12, max: 22 },
+  PROL: { min: 102, max: 496 },
+  OEST: { min: 45, max: 854 },
+  FSH: { min: 6, max: 12.5 },
+  LH: { min: 2.4, max: 12.6 },
+  TEST: { min: 0.5, max: 2 },
+  SHBG: { min: 32.4, max: 128 },
+};
+
+export const HORMONE_NAMES: Record<string, string> = {
+  AMH: "Anti-Müllerian Hormone",
+  FT4: "Free Thyroxine",
+  PROL: "Prolactin",
+  OEST: "Oestradiol",
+  FSH: "Follicle Stimulating Hormone",
+  LH: "Luteinising Hormone",
+  TEST: "Testosterone",
+  SHBG: "Sex Hormone Binding Globulin",
+};

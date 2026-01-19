@@ -1,0 +1,141 @@
+.resultRowContainer {
+  margin-bottom: 1rem;
+}
+
+.resultRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.5fr 1fr 0.8fr;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: white;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.resultRow:hover {
+  border-color: #646cff;
+  box-shadow: 0 4px 12px rgba(100, 108, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.resultRow.needsAttention {
+  border-left: 4px solid #ff6b6b;
+  background: linear-gradient(90deg, #fff5f5 0%, white 100%);
+}
+
+.resultCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cellLabel {
+  font-size: 0.75rem;
+  color: #6c757d;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cellValue {
+  font-size: 1rem;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.statusBadge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: fit-content;
+}
+
+.statusBadge.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 2px solid #c3e6cb;
+}
+
+.statusBadge.warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 2px solid #ffc107;
+}
+
+.expandToggle {
+  justify-content: center;
+  align-items: center;
+}
+
+.expandButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(135deg, #646cff 0%, #535bf2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(100, 108, 255, 0.2);
+}
+
+.expandButton:hover {
+  background: linear-gradient(135deg, #535bf2 0%, #4248d4 100%);
+  box-shadow: 0 4px 8px rgba(100, 108, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.expandIcon {
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+.expandText {
+  font-size: 0.85rem;
+}
+
+@media (max-width: 1024px) {
+  .resultRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .resultCell {
+    padding: 0.5rem 0;
+  }
+
+  .status {
+    grid-column: 1 / -1;
+  }
+
+  .expandToggle {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+
+  .expandButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .resultRow {
+    grid-template-columns: 1fr;
+  }
+
+  .resultCell {
+    padding: 0.25rem 0;
+  }
+}

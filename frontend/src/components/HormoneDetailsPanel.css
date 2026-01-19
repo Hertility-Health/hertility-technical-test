@@ -1,0 +1,165 @@
+.hormoneDetailsPanel {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-left: 4px solid #646cff;
+  padding: 2rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  animation: slideDown 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detailsTitle {
+  margin: 0 0 1.5rem 0;
+  color: #2c3e50;
+  font-size: 1.25rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hormoneGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.hormoneCard {
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  border: 2px solid #e0e0e0;
+  transition: all 0.2s ease;
+}
+
+.hormoneCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hormoneCard.outOfRange {
+  border-color: #ff6b6b;
+  background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+}
+
+.hormoneCard.inRange {
+  border-color: #51cf66;
+  background: linear-gradient(135deg, #fff 0%, #f5fff5 100%);
+}
+
+.hormoneHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.hormoneCodeAndName {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.hormoneCode {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.hormoneFullName {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.hormoneStatusBadge {
+  flex-shrink: 0;
+}
+
+.statusBadge {
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.statusBadge.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.statusBadge.warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.hormoneMetrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.metricRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+}
+
+.metricLabel {
+  color: #6c757d;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.metricValue {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+.metricValue strong {
+  font-weight: 700;
+  color: #495057;
+}
+
+.alertMessage {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #fff3cd;
+  border-left: 3px solid #ffc107;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  color: #856404;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .hormoneGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hormoneHeader {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .hormoneStatusBadge {
+    align-self: flex-start;
+  }
+}

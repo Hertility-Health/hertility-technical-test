@@ -11,15 +11,13 @@ function main() {
     app.use(cors());
     app.use(express.json());
 
-    const router = express.Router();
-
     /* health check path */
-    router.get("/", (_req, res) => {
+    app.get("/", (_req, res) => {
         res.send("OK");
     });
 
-   // api routers
-   app.use("/results", resultsRouter); 
+    // api routers
+    app.use("/results", resultsRouter);
 
     app.listen(PORT, HOST, () => {
         console.log(`Started API on ${HOST}:${PORT} 🚀 ✨`);
