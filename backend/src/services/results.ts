@@ -16,7 +16,7 @@ export interface Results {
 // this would normally be a database query - you don't need to change this function
 export async function fetchResults() {
     const json: { default: Results[] } = await import("../data/results.json", {
-        assert: { type: "json" },
+        with: { type: "json" },
     });
     const results = json.default;
     return results;
