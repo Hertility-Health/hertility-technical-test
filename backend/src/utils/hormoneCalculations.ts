@@ -1,8 +1,4 @@
-export interface HormoneResults {
-    code: string;
-    units: string;
-    value: number;
-}
+import { HormoneResult } from "../services/results";
 
 const NORMAL_RANGES: Record<string, { min: number; max: number }> = {
     AMH: {
@@ -44,7 +40,7 @@ export interface StatusResult {
     explanations: string[];
 }
 
-export function calculateStatus(hormoneResults: HormoneResults[]): StatusResult {
+export function calculateStatus(hormoneResults: HormoneResult[]): StatusResult {
     const explanations: string[] = [];
 
     for (const result of hormoneResults) {
