@@ -6,7 +6,7 @@ export interface HormoneResult {
     value: number;
 }
 
-export interface Results {
+interface Results {
     id: number;
     userId: number;
     hormoneResults: HormoneResult[];
