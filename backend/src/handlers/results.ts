@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-import { fetchResults } from "../services/results";
+import { getResultsWithStatus } from "../services/results";
 
 export const resultsHandler = async (_req: Request, res: Response) => {
-    const results = await fetchResults();
-
-    res.send(results);
+    const resultsWithStatus = await getResultsWithStatus();
+    res.send(resultsWithStatus);
 };
