@@ -34,11 +34,14 @@ h2 {
   display: flex;
   justify-content: space-between;
   padding-left: 10px;
+  margin-bottom: 10px;
 }
-.resultsHeader > p {
+.resultsHeader > div {
   width: 200px;
   text-align: left;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .resultsList {
@@ -48,16 +51,19 @@ h2 {
 }
 
 .resultsItem {
-  display: flex;
-  justify-content: space-between;
   padding-left: 10px;
   background-color: #e6e6e6;
   border-radius: 6px;
   box-shadow: #929292 0px 0px 4px;
 }
 
-.resultsItem > p {
+.resultsItem > .topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.resultsItem > .topRow > p {
   width: 200px;
   text-align: left;
-  text-transform: uppercase;
 }

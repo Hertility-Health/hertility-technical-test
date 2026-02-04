@@ -14,7 +14,8 @@
     "outDir": "dist",
     "sourceMap": true,
     "lib": ["es2022"],
-    "checkJs": true
+    "checkJs": true,
+    "types": ["jest", "node"],
   },
   "include": ["src/**/*"]
 }

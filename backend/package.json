@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "NODE_OPTIONS=\"$NODE_OPTIONS --experimental-vm-modules\" jest --runInBand",
     "dev:run": "node --watch dist/index.js",
     "dev:build": "tsc --watch",
     "dev": "npm run dev:build & npm run dev:run"
@@ -14,10 +14,15 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "ts-jest": "^29.4.6",
+    "tsc": "^2.0.4",
+    "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^4.17.21"
+    "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
+    "jest": "^30.2.0"
   }
 }
