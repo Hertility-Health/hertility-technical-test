@@ -65,7 +65,7 @@ function App() {
                 </div>
                 <div className="resultsList">
                     {
-                        results.map(result => <ResultRow result={result} />)
+                        results.map(result => <ResultRow key={result.id} result={result} />)
                     }
                 </div>
             </div>
