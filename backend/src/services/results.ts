@@ -44,9 +44,9 @@ export function enrichResults(
 }
 
 export function filterResults(
-  results: Results<EnrichedHormoneResults>[],
+  results: EnrichedResults<EnrichedHormoneResults>[],
   queryParams: HormoneQueryParams,
-) {
+): EnrichedResults<EnrichedHormoneResults>[] {
   if (queryParams?.inRange === undefined) return results;
 
   return results.filter((result) => {

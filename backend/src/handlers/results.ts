@@ -6,6 +6,7 @@ import {
 } from "../services/results";
 import { HormoneQueryParams, HormoneRanges } from "../services/types";
 
+type AppLocals = { hormoneRanges: HormoneRanges };
 type ResultsRequest = Request<
   Record<string, never>,
   unknown,
@@ -13,18 +14,16 @@ type ResultsRequest = Request<
   HormoneQueryParams
 >;
 
-const parseQueryParams = (params: ResultsRequest) => {
-  return params.query;
-};
+const parseQueryParams = (query: HormoneQueryParams): HormoneQueryParams =>
+  query;
 
 export const resultsHandler = async (req: ResultsRequest, res: Response) => {
-  let queryParams = parseQueryParams(req);
-
-  const ranges: HormoneRanges = req.app.locals.hormoneRanges; // check undefined
+  let queryParams = parseQueryParams(req.query);
+  const { hormoneRanges } = req.app.locals as AppLocals;
 
   let results = await fetchResults();
 
-  let enrichedResults = enrichResults(results, ranges); // find better naming
+  let enrichedResults = enrichResults(results, hormoneRanges); // find better naming
 
   let responses = filterResults(enrichedResults, queryParams);
 

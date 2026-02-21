@@ -7,19 +7,15 @@ import {
   HormoneResults,
 } from "./types";
 
-const getRange = async () => {
-  try {
-    const ranges: { default: HormoneRanges } = await import(
-      "../constants/ranges.json",
-      {
-        assert: { type: "json" }, /// deprecated
-      }
-    );
+const getRange = async (): Promise<HormoneRanges> => {
+  const ranges: { default: HormoneRanges } = await import(
+    "../constants/ranges.json",
+    {
+      assert: { type: "json" }, /// deprecated
+    }
+  );
 
-    return ranges.default;
-  } catch (error) {
-    console.log(error);
-  }
+  return ranges.default;
 };
 
 function mapRange(code: string, ranges: HormoneRanges) {
@@ -42,7 +38,7 @@ function computeAnomaly({
   units: string;
   value: number;
   targetRange: HormoneRange;
-}): Anomaly | null {
+}): Anomaly | undefined {
   if (value < targetRange.min) {
     return {
       hormone,
@@ -60,7 +56,7 @@ function computeAnomaly({
       target: targetRange,
     };
   } else {
-    return null;
+    return undefined;
   }
 }
 
@@ -71,7 +67,7 @@ function enrichHormoneResults(
   return hormonedResults.map((hResult) => {
     let range = mapRange(hResult.code, ranges);
     let inRange = checkRange(hResult.value, range);
-    let anomaly = null;
+    let anomaly = undefined;
 
     if (range)
       anomaly = computeAnomaly({

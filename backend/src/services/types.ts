@@ -26,8 +26,8 @@ export interface Anomaly {
 }
 
 export interface EnrichedHormoneResults extends HormoneResults {
-  inRange: boolean | undefined;
-  anomaly: Anomaly | null;
+  inRange: boolean | undefined; // undefined means we cannot determine range (e.g. unknown hormone/missing reference range)
+  anomaly: Anomaly | undefined; // undefined means no anomaly could be computed for this hormone result
   isKnownHormone: boolean;
 }
 export interface EnrichedResults<T> {
