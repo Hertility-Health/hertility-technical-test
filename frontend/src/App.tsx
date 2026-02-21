@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './App.css';
 import React from 'react';
-import { Anomaly, FilterType, InRangeEnum, Results } from './types';
+import { FilterType, InRangeEnum, Results } from './types';
 import Filters from './components/Filter';
 import ResultsTable from './components/Table';
 
@@ -13,25 +13,15 @@ const fetchResults = async (query: { inRange?: boolean }) => {
 
     const res = await fetch(url);
     const json = await res.json();
-    return json as Results<Anomaly>[];
+    return json as Results[];
   } catch (error) {
     console.error(error);
   }
   return [];
 };
 
-function populateInRangeCol(results: Results<Anomaly>[]) {
-  return results.map((result) => {
-    const inRange = result.hormoneResults.every((result) => result.inRange);
-    return {
-      ...result,
-      inRange,
-    };
-  });
-}
-
 function App() {
-  const [results, setResults] = React.useState<Results<Anomaly>[]>([]);
+  const [results, setResults] = React.useState<Results[]>([]);
 
   const [filters, setFilters] = React.useState<FilterType>({ inRange: InRangeEnum.All });
 
@@ -51,8 +41,7 @@ function App() {
     }
 
     fetchResults(query).then((results) => {
-      let resultsWithStatus = populateInRangeCol(results);
-      setResults(resultsWithStatus);
+      setResults(results);
     });
   }, [filters]);
 

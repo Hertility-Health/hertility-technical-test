@@ -1,9 +1,9 @@
-import { Anomaly, Results } from '../types';
+import { Results } from '../types';
 import { AnomalyPopover, HormoneResultsPopover } from './Popover';
 import { Badge } from './Badge';
 
 type ResultsTableProps = {
-  results: Array<Results<Anomaly>>;
+  results: Array<Results>;
 };
 
 export default function ResultsTable({ results }: ResultsTableProps) {

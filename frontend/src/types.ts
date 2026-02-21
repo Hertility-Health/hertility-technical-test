@@ -11,11 +11,11 @@ export interface HormoneResults {
   isKnownHormone: boolean;
 }
 
-export interface Results<T> {
+export interface Results {
   id: number;
   userId: number;
   hormoneResults: Array<HormoneResults>;
-  anomalies: Array<T>;
+  anomalies: Array<Anomaly>;
   inRange: boolean;
 }
 
