@@ -48,7 +48,6 @@ export function filterResults(
   queryParams: HormoneQueryParams,
 ) {
   if (queryParams?.inRange === undefined) return results;
-  console.log({ queryRange: queryParams.inRange });
 
   return results.filter((result) => {
     if (queryParams.inRange == "true") {
