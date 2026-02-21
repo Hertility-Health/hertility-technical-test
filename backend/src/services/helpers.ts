@@ -7,27 +7,32 @@ import {
   HormoneResults,
 } from "./types";
 
+// Load hormone reference ranges from static JSON.
 const getRange = async (): Promise<HormoneRanges> => {
   const ranges: { default: HormoneRanges } = await import(
     "../constants/ranges.json",
     {
-      assert: { type: "json" }, /// deprecated
+      assert: { type: "json" }, // Deprecated: won't work on Node 25; kept temporarily for consistency with results.json import style
     }
   );
 
   return ranges.default;
 };
 
+// Resolve a hormone code to its configured reference range (case-insensitive).
 function mapRange(code: string, ranges: HormoneRanges) {
   return ranges[code.toUpperCase()];
 }
+// Return true/false when range exists, otherwise undefined for unknown hormones.
 function checkRange(value: number, range: HormoneRange | undefined) {
   if (range) return value >= range.min && value <= range.max;
   return undefined;
 }
+// Round floating-point values to two decimals for stable API output.
 function normalizeDecimal(value: number) {
   return Number(value.toFixed(2));
 }
+// Build anomaly details when a value falls outside its target range.
 function computeAnomaly({
   hormone,
   value,
@@ -60,6 +65,7 @@ function computeAnomaly({
   }
 }
 
+// Add derived range flags and anomaly info to each raw hormone result.
 function enrichHormoneResults(
   hormonedResults: HormoneResults[],
   ranges: HormoneRanges,
@@ -86,10 +92,12 @@ function enrichHormoneResults(
   });
 }
 
+// True only if every hormone result is within range.
 function allInRange(hResults: EnrichedHormoneResults[]) {
   return hResults.every((hResult) => hResult.inRange);
 }
 
+// True if any hormone result is out of range or not evaluable.
 function someNotInRange(hResults: EnrichedHormoneResults[]) {
   return hResults.some((hResult) => !hResult.inRange);
 }

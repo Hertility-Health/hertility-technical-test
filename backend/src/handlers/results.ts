@@ -23,7 +23,7 @@ export const resultsHandler = async (req: ResultsRequest, res: Response) => {
 
   let results = await fetchResults();
 
-  let enrichedResults = enrichResults(results, hormoneRanges); // find better naming
+  let enrichedResults = enrichResults(results, hormoneRanges);
 
   let responses = filterResults(enrichedResults, queryParams);
 
