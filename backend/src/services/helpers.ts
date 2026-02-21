@@ -23,7 +23,7 @@ const getRange = async () => {
 };
 
 function mapRange(code: string, ranges: HormoneRanges) {
-  return ranges[code];
+  return ranges[code.toUpperCase()];
 }
 function checkRange(value: number, range: HormoneRange | undefined) {
   if (range) return value >= range.min && value <= range.max;
@@ -32,19 +32,30 @@ function checkRange(value: number, range: HormoneRange | undefined) {
 function normalizeDecimal(value: number) {
   return Number(value.toFixed(2));
 }
-function computeAnomaly(
-  value: number,
-  targetRange: HormoneRange,
-): Anomaly | null {
+function computeAnomaly({
+  hormone,
+  value,
+  units,
+  targetRange,
+}: {
+  hormone: string;
+  units: string;
+  value: number;
+  targetRange: HormoneRange;
+}): Anomaly | null {
   if (value < targetRange.min) {
     return {
+      hormone,
       kind: AnomalyKind.Under,
+      units,
       value: normalizeDecimal(targetRange.min - value),
       target: targetRange,
     };
   } else if (value > targetRange.max) {
     return {
+      hormone,
       kind: AnomalyKind.Over,
+      units,
       value: normalizeDecimal(value - targetRange.max),
       target: targetRange,
     };
@@ -57,16 +68,24 @@ function enrichHormoneResults(
   hormonedResults: HormoneResults[],
   ranges: HormoneRanges,
 ): EnrichedHormoneResults[] {
-  return hormonedResults.map((h_result) => {
-    let range = mapRange(h_result.code, ranges);
-    let inRange = checkRange(h_result.value, range);
+  return hormonedResults.map((hResult) => {
+    let range = mapRange(hResult.code, ranges);
+    let inRange = checkRange(hResult.value, range);
     let anomaly = null;
-    if (range) anomaly = computeAnomaly(h_result.value, range);
+
+    if (range)
+      anomaly = computeAnomaly({
+        hormone: hResult.code,
+        units: hResult.units,
+        value: hResult.value,
+        targetRange: range,
+      });
 
     return {
-      ...h_result,
+      ...hResult,
       inRange,
       anomaly,
+      isKnownHormone: !!range, // In case hormone not available in ranges.json
     };
   });
 }

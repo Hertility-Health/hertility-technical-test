@@ -15,6 +15,7 @@ function main() {
   const router = express.Router();
 
   helpers.getRange().then((ranges) => {
+    // To avoid reading ranges.json on each request
     app.locals.hormoneRanges = ranges;
   });
 

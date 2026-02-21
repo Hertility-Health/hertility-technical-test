@@ -1,5 +1,6 @@
 import {
   EnrichedHormoneResults,
+  EnrichedResults,
   HormoneQueryParams,
   HormoneRanges,
   HormoneResults,
@@ -21,18 +22,32 @@ export async function fetchResults() {
 export function enrichResults(
   results: Results<HormoneResults>[],
   ranges: HormoneRanges,
-) {
-  return results.map((result) => ({
-    ...result,
-    hormoneResults: helpers.enrichHormoneResults(result.hormoneResults, ranges),
-  }));
+): EnrichedResults<EnrichedHormoneResults>[] {
+  return results.map((result) => {
+    const hormoneResults = helpers.enrichHormoneResults(
+      result.hormoneResults,
+      ranges,
+    );
+
+    const anomalies = hormoneResults.flatMap((h) =>
+      h.anomaly ? [h.anomaly] : [],
+    );
+
+    const inRange = hormoneResults.every((hResult) => hResult.inRange);
+    return {
+      ...result,
+      hormoneResults,
+      anomalies,
+      inRange,
+    };
+  });
 }
 
 export function filterResults(
   results: Results<EnrichedHormoneResults>[],
   queryParams: HormoneQueryParams,
 ) {
-  if (typeof queryParams == "undefined") return results;
+  if (queryParams?.inRange === undefined) return results;
   console.log({ queryRange: queryParams.inRange });
 
   return results.filter((result) => {
