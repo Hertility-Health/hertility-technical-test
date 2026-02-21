@@ -1,8 +1,32 @@
 import { Request, Response } from "express";
-import { fetchResults } from "../services/results";
+import {
+  enrichResults,
+  fetchResults,
+  filterResults,
+} from "../services/results";
+import { HormoneQueryParams, HormoneRanges } from "../services/types";
 
-export const resultsHandler = async (_req: Request, res: Response) => {
-    const results = await fetchResults();
+type ResultsRequest = Request<
+  Record<string, never>,
+  unknown,
+  unknown,
+  HormoneQueryParams
+>;
 
-    res.send(results);
+const parseQueryParams = (params: ResultsRequest) => {
+  return params.query;
+};
+
+export const resultsHandler = async (req: ResultsRequest, res: Response) => {
+  let queryParams = parseQueryParams(req);
+
+  const ranges: HormoneRanges = req.app.locals.hormoneRanges; // check undefined
+
+  let results = await fetchResults();
+
+  let enrichedResults = enrichResults(results, ranges); // find better naming
+
+  let responses = filterResults(enrichedResults, queryParams);
+
+  res.send(responses);
 };
