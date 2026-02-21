@@ -1,29 +1,35 @@
 import express from "express";
 import cors from "cors";
 import { resultsRouter } from "./routers/results";
+import { helpers } from "./services/helpers";
 
 const PORT = 52863;
 const HOST = "0.0.0.0";
 
 function main() {
-    const app = express();
+  const app = express();
 
-    app.use(cors());
-    app.use(express.json());
+  app.use(cors());
+  app.use(express.json());
 
-    const router = express.Router();
+  const router = express.Router();
 
-    /* health check path */
-    router.get("/", (_req, res) => {
-        res.send("OK");
-    });
+  helpers.getRange().then((ranges) => {
+    // To avoid reading ranges.json on each request
+    app.locals.hormoneRanges = ranges;
+  });
 
-   // api routers
-   app.use("/results", resultsRouter); 
+  /* health check path */
+  router.get("/", (_req, res) => {
+    res.send("OK");
+  });
 
-    app.listen(PORT, HOST, () => {
-        console.log(`Started API on ${HOST}:${PORT} 🚀 ✨`);
-    });
+  // api routers
+  app.use("/results", resultsRouter);
+
+  app.listen(PORT, HOST, () => {
+    console.log(`Started API on ${HOST}:${PORT} 🚀 ✨`);
+  });
 }
 
 main();

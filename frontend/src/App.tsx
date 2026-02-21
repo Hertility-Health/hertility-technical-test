@@ -1,68 +1,60 @@
 import { useEffect } from 'react';
-import './App.css'
+import './App.css';
 import React from 'react';
+import { FilterType, InRangeEnum, Results } from './types';
+import Filters from './components/Filter';
+import ResultsTable from './components/Table';
 
-interface HormoneResults {
-  code: string;
-  units: string;
-  value: number;
-}
-
-interface Results {
-  id: number;
-  userId: number;
-  hormoneResults: Array<HormoneResults>;
-}
-
-const fetchResults = async () => {
+const fetchResults = async (query: { inRange?: boolean }) => {
   try {
-    const res = await fetch("http://localhost:52863/results")
-    const json = await res.json()
-    return json as Results[]
+    let url = 'http://localhost:52863/results';
+
+    if (query.inRange != undefined) url = `${url}?inRange=${query.inRange}`;
+
+    const res = await fetch(url);
+    const json = await res.json();
+    return json as Results[];
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-  return []
-}
+  return [];
+};
 
 function App() {
+  const [results, setResults] = React.useState<Results[]>([]);
 
-  const [results, setResults] = React.useState<Results[]>([])
+  const [filters, setFilters] = React.useState<FilterType>({ inRange: InRangeEnum.All });
+
+  const onFilterChange = React.useCallback((value: InRangeEnum) => {
+    setFilters((prevFilter) => {
+      const copy = { ...prevFilter };
+      copy.inRange = value;
+      return copy;
+    });
+  }, []);
 
   useEffect(() => {
-    fetchResults().then(results => {
-      setResults(results)
-    })
-  }, [])
+    let query: { inRange: boolean | undefined } = { inRange: undefined };
+
+    if (filters.inRange != InRangeEnum.All) {
+      query.inRange = filters.inRange === InRangeEnum.In;
+    }
+
+    fetchResults(query).then((results) => {
+      setResults(results);
+    });
+  }, [filters]);
 
   return (
-    <div> 
+    <div>
       <h2>Hertility admin dashboard</h2>
       <h1>Hormone results</h1>
-
-      <div className="results">
-        <div className="resultsHeader">
-          <p>result id</p>
-          <p>user id</p>
-          <p>status</p>
-        </div>
-        <div className="resultsList">
-          {
-            results.map(result => {
-
-              return (
-                <div className="resultsItem" key={result.id}>
-                    <p>{result.id}</p>
-                    <p>{result.userId}</p>
-                    <p></p>
-                </div>
-              )
-            })
-          }
-        </div>
+      <div className="space-y-3">
+        <Filters selected={filters.inRange} onChange={onFilterChange} />
+        <ResultsTable results={results} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
