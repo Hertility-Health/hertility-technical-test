@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { resultsRouter } from "./routers/results";
+import { normalRangesRouter, resultsRouter } from "./routers/results";
 
 const PORT = 52863;
 const HOST = "0.0.0.0";
@@ -20,6 +20,7 @@ function main() {
 
    // api routers
    app.use("/results", resultsRouter); 
+   app.use("/normal-ranges", normalRangesRouter);
 
     app.listen(PORT, HOST, () => {
         console.log(`Started API on ${HOST}:${PORT} 🚀 ✨`);
