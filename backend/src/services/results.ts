@@ -18,3 +18,11 @@ export async function fetchResults() {
 	const results = json.default;
     return results;
 }
+
+export async function fetchNormalRanges() {
+    const json: { default: Record<string, { min: number; max: number; }> } = await import("../data/ranges.json", {
+        assert: { type: "json" },
+    });
+    const normalRanges = json.default;
+    return normalRanges;
+}
