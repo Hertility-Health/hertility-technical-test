@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 import React from 'react';
 
@@ -12,7 +12,10 @@ interface Results {
   id: number;
   userId: number;
   hormoneResults: Array<HormoneResults>;
+  status:"IN RANGE" |"NOT IN RANGE"
 }
+
+type Filter ="ALL" |"IN RANGE"|"NOT IN RANGE";
 
 const fetchResults = async () => {
   try {
@@ -26,7 +29,7 @@ const fetchResults = async () => {
 }
 
 function App() {
-
+  const [filter ,setFilter]=useState<Filter>("ALL");
   const [results, setResults] = React.useState<Results[]>([])
 
   useEffect(() => {
@@ -35,10 +38,20 @@ function App() {
     })
   }, [])
 
+  const filteredResults=results.filter((result)=>{
+    if(filter === "ALL") return true;
+    return result.status === filter;
+  });
+
   return (
     <div> 
       <h2>Hertility admin dashboard</h2>
       <h1>Hormone results</h1>
+      <div>
+        <button className="button" onClick={()=>setFilter("ALL")}>All</button>
+        <button className="button" onClick={()=>setFilter("IN RANGE")}>In Range</button>
+        <button className="button" onClick={()=>setFilter("NOT IN RANGE")}>Not In Range</button>
+      </div>
 
       <div className="results">
         <div className="resultsHeader">
@@ -48,13 +61,13 @@ function App() {
         </div>
         <div className="resultsList">
           {
-            results.map(result => {
+            filteredResults.map(result => {
 
               return (
                 <div className="resultsItem" key={result.id}>
                     <p>{result.id}</p>
                     <p>{result.userId}</p>
-                    <p></p>
+                    <p>{result.status}</p>
                 </div>
               )
             })
